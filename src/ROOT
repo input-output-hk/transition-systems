@@ -3,5 +3,14 @@ chapter IOG
 session Transition_Systems = HOL +
   description
     \<open>Generic support for working with labeled transition systems.\<close>
+  sessions
+    "HOL-Eisbach"
+  theories
+    "Transition_Systems-Foundations"
+    "Transition_Systems-Simulation_Systems"
+    "Transition_Systems-Transition_Systems"
+    "Transition_Systems-Weak_Transition_Systems"
+    "Transition_Systems-Mutation_Systems"
+    "Transition_Systems-Weak_Mutation_Systems"
   document_files
     "root.tex"
