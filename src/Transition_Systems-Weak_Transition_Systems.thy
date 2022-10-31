@@ -19,6 +19,12 @@ definition weak_transition :: "'a \<Rightarrow> 'p relation" (\<open>'(\<Rightar
 abbreviation weak_transition_std :: "'p \<Rightarrow> 'a \<Rightarrow> 'p \<Rightarrow> bool" (\<open>(_ \<Rightarrow>\<lparr>_\<rparr>/ _)\<close> [51, 0, 51] 50) where
   "p \<Rightarrow>\<lparr>\<alpha>\<rparr> q \<equiv> (\<Rightarrow>\<lparr>\<alpha>\<rparr>) p q"
 
+lemma transition_in_weak_transition_rule:
+  assumes "p \<rightarrow>\<lparr>\<alpha>\<rparr> q"
+  shows "p \<Rightarrow>\<lparr>\<alpha>\<rparr> q"
+  using assms
+  by auto
+
 subsection \<open>The Weak System\<close>
 
 sublocale weak: transition_system \<open>weak_transition\<close> .
