@@ -29,6 +29,26 @@ lemma equality_is_simulation:
   shows "sim (=)"
   by (simp add: OO_eq eq_OO)
 
+lemma relation_composition_is_simulation:
+  assumes "sim K" and "sim L"
+  shows "sim (K OO L)"
+proof -
+  have "(K OO L)\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) \<le> (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (K OO L)\<inverse>\<inverse>" for \<alpha>
+  proof -
+    have "(K OO L)\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) \<le> L\<inverse>\<inverse> OO K\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>)"
+      by blast
+    also from \<open>sim K\<close> have "\<dots> \<le> L\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO K\<inverse>\<inverse>"
+      by (simp add: relcompp_mono)
+    also from \<open>sim L\<close> have "\<dots> \<le> (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO L\<inverse>\<inverse> OO K\<inverse>\<inverse>"
+      by (fastforce simp add: relcompp_mono relcompp_assoc)
+    also have "\<dots> \<le> (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (K OO L)\<inverse>\<inverse>"
+      by blast
+    finally show ?thesis .
+  qed
+  then show ?thesis
+    by blast
+qed
+
 subsection \<open>Bisimilarity\<close>
 
 notation bisimilarity (infix \<open>\<sim>\<close> 50)
