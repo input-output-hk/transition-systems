@@ -49,6 +49,11 @@ proof -
     by blast
 qed
 
+lemma equality_is_bisimulation:
+  shows "bisim (=)"
+  using equality_is_simulation
+  by simp
+
 subsection \<open>Bisimilarity\<close>
 
 notation bisimilarity (infix \<open>\<sim>\<close> 50)
