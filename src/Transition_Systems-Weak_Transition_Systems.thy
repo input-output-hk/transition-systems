@@ -36,6 +36,39 @@ notation weak.constant_bisimilarity (\<open>[\<approx>]\<close>)
 notation weak.simulation_up_to (\<open>weak'_sim\<^bsub>_\<^esub>\<close>)
 notation weak.bisimulation_up_to (\<open>weak'_bisim\<^bsub>_\<^esub>\<close>)
 
+lemma converse_weak_tau_transition_is_weak_simulation:
+  shows "weak_sim (\<Rightarrow>\<lparr>\<tau>\<rparr>)\<inverse>\<inverse>"
+proof -
+  have "(\<Rightarrow>\<lparr>\<tau>\<rparr>)\<inverse>\<inverse>\<inverse>\<inverse> OO (\<Rightarrow>\<lparr>\<alpha>\<rparr>) \<le> (\<Rightarrow>\<lparr>\<alpha>\<rparr>) OO (\<Rightarrow>\<lparr>\<tau>\<rparr>)\<inverse>\<inverse>\<inverse>\<inverse>" for \<alpha>
+  proof -
+    have "(\<Rightarrow>\<lparr>\<tau>\<rparr>)\<inverse>\<inverse>\<inverse>\<inverse> OO (\<Rightarrow>\<lparr>\<alpha>\<rparr>) = (\<Rightarrow>\<lparr>\<tau>\<rparr>) OO (\<Rightarrow>\<lparr>\<alpha>\<rparr>)"
+      by blast
+    also have "\<dots> \<le> (\<Rightarrow>\<lparr>\<alpha>\<rparr>)"
+    proof (cases "\<alpha> = \<tau>")
+      case True
+      from \<open>\<alpha> = \<tau>\<close> show ?thesis
+        by (simp add: transp_relcompp_less_eq)
+    next
+      case False
+      from \<open>\<alpha> \<noteq> \<tau>\<close> have "(\<Rightarrow>\<lparr>\<tau>\<rparr>) OO (\<Rightarrow>\<lparr>\<alpha>\<rparr>) = (\<Rightarrow>\<lparr>\<tau>\<rparr>) OO (\<rightarrow>\<lparr>\<tau>\<rparr>)\<^sup>*\<^sup>* OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (\<rightarrow>\<lparr>\<tau>\<rparr>)\<^sup>*\<^sup>*"
+        by simp
+      also from \<open>\<alpha> \<noteq> \<tau>\<close> have "\<dots> = ((\<rightarrow>\<lparr>\<tau>\<rparr>)\<^sup>*\<^sup>* OO (\<rightarrow>\<lparr>\<tau>\<rparr>)\<^sup>*\<^sup>*) OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (\<rightarrow>\<lparr>\<tau>\<rparr>)\<^sup>*\<^sup>*"
+        by (simp add: relcompp_assoc)
+      also have "\<dots> \<le> (\<rightarrow>\<lparr>\<tau>\<rparr>)\<^sup>*\<^sup>* OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (\<rightarrow>\<lparr>\<tau>\<rparr>)\<^sup>*\<^sup>*"
+        by (simp add: relcompp_mono transp_relcompp_less_eq)
+      also from \<open>\<alpha> \<noteq> \<tau>\<close> have "\<dots> = (\<Rightarrow>\<lparr>\<alpha>\<rparr>)"
+        by simp
+      finally show ?thesis .
+    qed
+    also have "\<dots> \<le> (\<Rightarrow>\<lparr>\<alpha>\<rparr>) OO (\<Rightarrow>\<lparr>\<tau>\<rparr>)"
+      by auto
+    finally show ?thesis
+      by simp
+  qed
+  then show ?thesis
+    by simp
+qed
+
 subsection \<open>The Mixed System\<close>
 
 sublocale mixed: simulation_system \<open>transition\<close> \<open>weak_transition\<close> .
