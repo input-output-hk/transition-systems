@@ -25,7 +25,7 @@ notation bisimulation (\<open>bisim\<close>)
 
 lemma equality_is_simulation:
   shows "sim (=)"
-  by (simp add: OO_eq eq_OO)
+  by (simp add: eq_OO OO_eq)
 
 lemma relation_composition_is_simulation:
   assumes "sim K" and "sim L"
