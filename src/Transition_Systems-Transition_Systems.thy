@@ -44,7 +44,7 @@ proof -
     finally show ?thesis .
   qed
   then show ?thesis
-    by blast
+    by simp
 qed
 
 lemma equality_is_bisimulation:
