@@ -33,7 +33,7 @@ lemma relation_composition_is_simulation:
 proof -
   have "(K OO L)\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) \<le> (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (K OO L)\<inverse>\<inverse>" for \<alpha>
   proof -
-    have "(K OO L)\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) \<le> L\<inverse>\<inverse> OO K\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>)"
+    have "(K OO L)\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) = L\<inverse>\<inverse> OO K\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>)"
       by blast
     also from \<open>sim K\<close> have "\<dots> \<le> L\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO K\<inverse>\<inverse>"
       by (simp add: relcompp_mono)
