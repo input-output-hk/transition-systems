@@ -39,7 +39,7 @@ proof -
       by (simp add: relcompp_mono)
     also from \<open>sim L\<close> have "\<dots> \<le> (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO L\<inverse>\<inverse> OO K\<inverse>\<inverse>"
       by fastforce
-    also have "\<dots> \<le> (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (K OO L)\<inverse>\<inverse>"
+    also have "\<dots> = (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (K OO L)\<inverse>\<inverse>"
       by blast
     finally show ?thesis .
   qed
