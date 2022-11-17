@@ -23,8 +23,6 @@ notation simulation (\<open>sim\<close>)
 
 notation bisimulation (\<open>bisim\<close>)
 
-subsubsection \<open>Common Simulations and Bisimulations\<close>
-
 lemma equality_is_simulation:
   shows "sim (=)"
   by (simp add: OO_eq eq_OO)
