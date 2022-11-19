@@ -284,6 +284,31 @@ proof -
     by simp
 qed
 
+lemma weak_tau_transitions_up_to_weak_bisimilarity_rule
+  [case_names forward_transition forward_bisimilarity backward_transition backward_bisimilarity]:
+  assumes
+    "p \<Rightarrow>\<lparr>\<tau>\<rparr> p'"
+  and
+    "p' \<approx> q"
+  and
+    "q \<Rightarrow>\<lparr>\<tau>\<rparr> q'"
+  and
+    "q' \<approx> p"
+  shows
+    "p \<approx> q"
+unfolding weak_bisimilarity_is_mixed_bisimilarity using assms
+proof (coinduction arbitrary: p q p' q' rule: mixed.symmetric_up_to_rule [where \<F> = "[\<asymp>]"])
+  case (simulation \<alpha> s)
+  from \<open>p \<rightarrow>\<lparr>\<alpha>\<rparr> s\<close> and \<open>q \<Rightarrow>\<lparr>\<tau>\<rparr> q'\<close> and \<open>q' \<approx> p\<close> obtain s' where "q' \<Rightarrow>\<lparr>\<alpha>\<rparr> s'" and "s' \<approx> s"
+    using transition_in_weak_transition_rule
+    by (blast elim: weak.bisimilarity.cases)
+  with \<open>q \<Rightarrow>\<lparr>\<tau>\<rparr> q'\<close> have "q \<Rightarrow>\<lparr>\<alpha>\<rparr> s'"
+    by (auto simp add: relcompp_assoc, blast intro: rtranclp_trans)
+  with \<open>s' \<approx> s\<close> show ?case
+    unfolding weak_bisimilarity_is_mixed_bisimilarity
+    by (fastforce intro: mixed.bisimilarity_symmetry_rule)
+qed (respectful, blast)
+
 end
 
 end
