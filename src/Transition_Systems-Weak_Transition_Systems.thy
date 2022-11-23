@@ -36,6 +36,21 @@ notation weak.constant_bisimilarity (\<open>[\<approx>]\<close>)
 notation weak.simulation_up_to (\<open>weak'_sim\<^bsub>_\<^esub>\<close>)
 notation weak.bisimulation_up_to (\<open>weak'_bisim\<^bsub>_\<^esub>\<close>)
 
+lemma mutual_silent_weak_transitions_up_to_bisimilarity:
+  assumes "p \<Rightarrow>\<lparr>\<tau>\<rparr> p'" and "p' \<approx> q" and "q \<Rightarrow>\<lparr>\<tau>\<rparr> q'" and "q' \<approx> p"
+  shows "p \<approx> q"
+using assms
+proof (coinduction arbitrary: p q p' q' rule: weak.symmetric_up_to_rule [where \<F> = "[\<approx>]"])
+  case (simulation \<alpha> s p q p' q')
+  from \<open>p \<Rightarrow>\<lparr>\<alpha>\<rparr> s\<close> and \<open>q' \<approx> p\<close> obtain t where "q' \<Rightarrow>\<lparr>\<alpha>\<rparr> t" and "s \<approx> t"
+    using weak.bisimilarity_is_simulation
+    by (blast dest: weak.bisimilarity_symmetry_rule)
+  from \<open>q \<Rightarrow>\<lparr>\<tau>\<rparr> q'\<close> and \<open>q' \<Rightarrow>\<lparr>\<alpha>\<rparr> t\<close> have "q \<Rightarrow>\<lparr>\<alpha>\<rparr> t"
+    by (slowsimp intro: rtranclp_trans)
+  with \<open>s \<approx> t\<close> show ?case
+    by fastforce
+qed (respectful, iprover)
+
 subsection \<open>The Mixed System\<close>
 
 sublocale mixed: simulation_system \<open>transition\<close> \<open>weak_transition\<close> .
