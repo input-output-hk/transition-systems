@@ -284,8 +284,7 @@ proof -
     by simp
 qed
 
-lemma weak_tau_transitions_up_to_weak_bisimilarity_rule
-  [case_names forward_transition forward_bisimilarity backward_transition backward_bisimilarity]:
+lemma weak_tau_transitions_up_to_weak_bisimilarity_rule:
   assumes
     "p \<Rightarrow>\<lparr>\<tau>\<rparr> p'"
   and
