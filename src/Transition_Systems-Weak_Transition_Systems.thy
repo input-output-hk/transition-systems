@@ -46,7 +46,7 @@ proof (coinduction arbitrary: p q p' q' rule: weak.symmetric_up_to_rule [where \
     using weak.bisimilarity_is_simulation
     by (blast dest: weak.bisimilarity_symmetry_rule)
   from \<open>q \<Rightarrow>\<lparr>\<tau>\<rparr> q'\<close> and \<open>q' \<Rightarrow>\<lparr>\<alpha>\<rparr> t\<close> have "q \<Rightarrow>\<lparr>\<alpha>\<rparr> t"
-    by (auto simp add: relcompp_assoc, blast intro: rtranclp_trans)
+    by (slowsimp intro: rtranclp_trans)
   with \<open>s \<approx> t\<close> show ?case
     by fastforce
 qed (respectful, blast)
