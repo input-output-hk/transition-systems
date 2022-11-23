@@ -42,12 +42,13 @@ lemma mutual_silent_weak_transitions_up_to_bisimilarity:
 using assms
 proof (coinduction arbitrary: p q p' q' rule: weak.symmetric_up_to_rule [where \<F> = "[\<approx>]"])
   case (simulation \<alpha> s p q p' q')
-  from \<open>p \<Rightarrow>\<lparr>\<alpha>\<rparr> s\<close> and \<open>q' \<approx> p\<close> obtain t where "q' \<Rightarrow>\<lparr>\<alpha>\<rparr> t" and "t \<approx> s"
-    by (blast elim: weak.bisimilarity.cases)
+  from \<open>p \<Rightarrow>\<lparr>\<alpha>\<rparr> s\<close> and \<open>q' \<approx> p\<close> obtain t where "q' \<Rightarrow>\<lparr>\<alpha>\<rparr> t" and "s \<approx> t"
+    using weak.bisimilarity_is_simulation
+    by (blast dest: weak.bisimilarity_symmetry_rule)
   with \<open>q \<Rightarrow>\<lparr>\<tau>\<rparr> q'\<close> have "q \<Rightarrow>\<lparr>\<alpha>\<rparr> t"
     by (auto simp add: relcompp_assoc, blast intro: rtranclp_trans)
-  with \<open>t \<approx> s\<close> show ?case
-    by (fastforce intro: weak.bisimilarity_symmetry_rule)
+  with \<open>s \<approx> t\<close> show ?case
+    by fastforce
 qed (respectful, blast)
 
 subsection \<open>The Mixed System\<close>
