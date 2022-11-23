@@ -284,7 +284,7 @@ proof -
     by simp
 qed
 
-lemma weak_tau_transitions_up_to_weak_bisimilarity_rule:
+lemma mutual_silent_weak_transitions_up_to_bisimilarity:
   assumes
     "p \<Rightarrow>\<lparr>\<tau>\<rparr> p'"
   and
