@@ -285,16 +285,8 @@ proof -
 qed
 
 lemma mutual_silent_weak_transitions_up_to_bisimilarity:
-  assumes
-    "p \<Rightarrow>\<lparr>\<tau>\<rparr> p'"
-  and
-    "p' \<approx> q"
-  and
-    "q \<Rightarrow>\<lparr>\<tau>\<rparr> q'"
-  and
-    "q' \<approx> p"
-  shows
-    "p \<approx> q"
+  assumes "p \<Rightarrow>\<lparr>\<tau>\<rparr> p'" and "p' \<approx> q" and "q \<Rightarrow>\<lparr>\<tau>\<rparr> q'" and "q' \<approx> p"
+  shows "p \<approx> q"
 unfolding weak_bisimilarity_is_mixed_bisimilarity using assms
 proof (coinduction arbitrary: p q p' q' rule: mixed.symmetric_up_to_rule [where \<F> = "[\<asymp>]"])
   case (simulation \<alpha> s)
