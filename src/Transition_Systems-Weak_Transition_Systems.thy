@@ -45,7 +45,7 @@ proof (coinduction arbitrary: p q p' q' rule: weak.symmetric_up_to_rule [where \
   from \<open>p \<Rightarrow>\<lparr>\<alpha>\<rparr> s\<close> and \<open>q' \<approx> p\<close> obtain t where "q' \<Rightarrow>\<lparr>\<alpha>\<rparr> t" and "s \<approx> t"
     using weak.bisimilarity_is_simulation
     by (blast dest: weak.bisimilarity_symmetry_rule)
-  with \<open>q \<Rightarrow>\<lparr>\<tau>\<rparr> q'\<close> have "q \<Rightarrow>\<lparr>\<alpha>\<rparr> t"
+  from \<open>q \<Rightarrow>\<lparr>\<tau>\<rparr> q'\<close> and \<open>q' \<Rightarrow>\<lparr>\<alpha>\<rparr> t\<close> have "q \<Rightarrow>\<lparr>\<alpha>\<rparr> t"
     by (auto simp add: relcompp_assoc, blast intro: rtranclp_trans)
   with \<open>s \<approx> t\<close> show ?case
     by fastforce
