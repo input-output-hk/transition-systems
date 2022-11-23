@@ -42,7 +42,7 @@ lemma mutual_silent_weak_transitions_up_to_bisimilarity:
 using assms
 proof (coinduction arbitrary: p q p' q' rule: weak.symmetric_up_to_rule [where \<F> = "[\<approx>]"])
   case (simulation \<alpha> s p q p' q')
-  from \<open>p \<Rightarrow>\<lparr>\<alpha>\<rparr> s\<close> and \<open>q \<Rightarrow>\<lparr>\<tau>\<rparr> q'\<close> and \<open>q' \<approx> p\<close> obtain t where "q' \<Rightarrow>\<lparr>\<alpha>\<rparr> t" and "t \<approx> s"
+  from \<open>p \<Rightarrow>\<lparr>\<alpha>\<rparr> s\<close> and \<open>q' \<approx> p\<close> obtain t where "q' \<Rightarrow>\<lparr>\<alpha>\<rparr> t" and "t \<approx> s"
     by (blast elim: weak.bisimilarity.cases)
   with \<open>q \<Rightarrow>\<lparr>\<tau>\<rparr> q'\<close> have "q \<Rightarrow>\<lparr>\<alpha>\<rparr> t"
     by (auto simp add: relcompp_assoc, blast intro: rtranclp_trans)
