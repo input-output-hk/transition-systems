@@ -23,6 +23,41 @@ notation simulation (\<open>sim\<close>)
 
 notation bisimulation (\<open>bisim\<close>)
 
+lemma equality_is_simulation:
+  shows "sim (=)"
+  by (simp add: eq_OO OO_eq)
+
+lemma relation_composition_is_simulation:
+  assumes "sim K" and "sim L"
+  shows "sim (K OO L)"
+proof -
+  have "(K OO L)\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) \<le> (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (K OO L)\<inverse>\<inverse>" for \<alpha>
+  proof -
+    have "(K OO L)\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) = L\<inverse>\<inverse> OO K\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>)"
+      by blast
+    also from \<open>sim K\<close> have "\<dots> \<le> L\<inverse>\<inverse> OO (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO K\<inverse>\<inverse>"
+      by (simp add: relcompp_mono)
+    also from \<open>sim L\<close> have "\<dots> \<le> (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO L\<inverse>\<inverse> OO K\<inverse>\<inverse>"
+      by fastforce
+    also have "\<dots> = (\<rightarrow>\<lparr>\<alpha>\<rparr>) OO (K OO L)\<inverse>\<inverse>"
+      by blast
+    finally show ?thesis .
+  qed
+  then show ?thesis
+    by simp
+qed
+
+lemma equality_is_bisimulation:
+  shows "bisim (=)"
+  using equality_is_simulation
+  by simp
+
+lemma relation_composition_is_bisimulation:
+  assumes "bisim K" and "bisim L"
+  shows "bisim (K OO L)"
+  using relation_composition_is_simulation and assms
+  by (simp only: simulation_def bisimulation_def bilateral_progression_def converse_relcompp)
+
 subsection \<open>Bisimilarity\<close>
 
 notation bisimilarity (infix \<open>\<sim>\<close> 50)
