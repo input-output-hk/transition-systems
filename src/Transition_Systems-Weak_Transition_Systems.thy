@@ -49,7 +49,7 @@ proof (coinduction arbitrary: p q p' q' rule: weak.symmetric_up_to_rule [where \
     by (slowsimp intro: rtranclp_trans)
   with \<open>s \<approx> t\<close> show ?case
     by fastforce
-qed (respectful, blast)
+qed (respectful, iprover)
 
 subsection \<open>The Mixed System\<close>
 
