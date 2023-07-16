@@ -1,9 +1,9 @@
 section \<open>Weak Mutation Systems\<close>
 
 theory "Transition_Systems-Weak_Mutation_Systems"
-imports
-  "Transition_Systems-Weak_Transition_Systems"
-  "Transition_Systems-Mutation_Systems"
+  imports
+    "Transition_Systems-Weak_Transition_Systems"
+    "Transition_Systems-Mutation_Systems"
 begin
 
 locale weak_mutation_system =
