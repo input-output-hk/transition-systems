@@ -1,9 +1,9 @@
 section \<open>Simulation Systems\<close>
 
 theory "Transition_Systems-Simulation_Systems"
-imports
-  "Transition_Systems-Foundations"
-  "HOL-Eisbach.Eisbach"
+  imports
+    "Transition_Systems-Foundations"
+    "HOL-Eisbach.Eisbach"
 begin
 
 unbundle lattice_syntax

@@ -1,8 +1,8 @@
 section \<open>Transition Systems\<close>
 
 theory "Transition_Systems-Transition_Systems"
-imports
-  "Transition_Systems-Simulation_Systems"
+  imports
+    "Transition_Systems-Simulation_Systems"
 begin
 
 locale transition_system =

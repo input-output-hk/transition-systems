@@ -1,6 +1,6 @@
 theory "Transition_Systems-Mutation_Systems"
-imports
-  "Transition_Systems-Simulation_Systems"
+  imports
+    "Transition_Systems-Simulation_Systems"
 begin
 
 primrec with_shortcut :: "('a \<Rightarrow> 'p relation) \<Rightarrow> ('a option \<Rightarrow> 'p relation)" where

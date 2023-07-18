@@ -1,8 +1,8 @@
 section \<open>Weak Transition Systems\<close>
 
 theory "Transition_Systems-Weak_Transition_Systems"
-imports
-  "Transition_Systems-Transition_Systems"
+  imports
+    "Transition_Systems-Transition_Systems"
 begin
 
 locale weak_transition_system =

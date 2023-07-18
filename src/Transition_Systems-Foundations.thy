@@ -1,8 +1,8 @@
 section \<open>Foundations\<close>
 
 theory "Transition_Systems-Foundations"
-imports
-  Main
+  imports
+    Main
 begin
 
 subsection \<open>Repeated Composition\<close>
