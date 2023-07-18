@@ -292,7 +292,7 @@ lemma post_bisimilarity_chain_is_mixed_respectful [respectful]:
   shows "mixed.respectful (\<F> \<frown> [\<sim>])"
 proof -
   have "(\<F> \<frown> [\<sim>]) = ([\<sim>] \<frown> \<F>\<^sup>\<dagger>)\<^sup>\<dagger>"
-    by (rule ext) (auto intro: bisimilarity_symmetry_rule)
+    by standard (auto intro: bisimilarity_symmetry_rule)
   moreover from \<open>mixed.respectful \<F>\<close> have "mixed.respectful ([\<sim>] \<frown> \<F>\<^sup>\<dagger>)\<^sup>\<dagger>"
     by respectful
   ultimately show ?thesis
